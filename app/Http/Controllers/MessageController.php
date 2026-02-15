@@ -81,7 +81,7 @@ class MessageController extends Controller
 
         $file = $request->file('file');
         $filename = time() . '_' . $file->getClientOriginalName();
-        $path = $file->storeAs('messages', $filename, 'public');
+        $path = $file->storeAs('messages', $filename, 'media');
 
         $message = Message::create([
             'chat_id' => $chat->id,

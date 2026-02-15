@@ -108,7 +108,7 @@ class User extends Authenticatable
     {
         if ($this->avatar) {
             $version = $this->updated_at ? $this->updated_at->timestamp : time();
-            return asset('storage/avatars/' . $this->avatar) . '?v=' . $version;
+            return asset('assets/avatars/' . $this->avatar) . '?v=' . $version;
         }
         return asset('images/default-avatar.png');
     }

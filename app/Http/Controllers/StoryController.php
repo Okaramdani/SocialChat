@@ -49,7 +49,7 @@ class StoryController extends Controller
 
         $file = $request->file('file');
         $filename = time() . '_' . $file->getClientOriginalName();
-        $path = $file->storeAs('stories', $filename, 'public');
+        $path = $file->storeAs('stories', $filename, 'media');
 
         $expiresHours = $request->input('expires_in', 24);
         
@@ -83,7 +83,7 @@ class StoryController extends Controller
         $story->update(['is_deleted' => true]);
 
         if ($story->media_path) {
-            Storage::disk('public')->delete('stories/' . $story->media_path);
+            Storage::disk('media')->delete('stories/' . $story->media_path);
         }
 
         return response()->json(['success' => true]);

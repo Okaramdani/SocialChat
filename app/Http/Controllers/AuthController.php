@@ -189,7 +189,7 @@ class AuthController extends Controller
         if ($request->hasFile('avatar')) {
             $avatar = $request->file('avatar');
             $filename = $user->id . '_' . time() . '.' . $avatar->getClientOriginalExtension();
-            $avatar->storeAs('avatars', $filename, 'public');
+            $avatar->storeAs('avatars', $filename, 'media');
             $updateData['avatar'] = $filename;
         }
 
@@ -204,7 +204,7 @@ class AuthController extends Controller
         $user = $request->user();
         
         if ($user->avatar) {
-            $avatarPath = storage_path('app/public/avatars/' . $user->avatar);
+            $avatarPath = public_path('assets/avatars/' . $user->avatar);
             if (file_exists($avatarPath)) {
                 unlink($avatarPath);
             }

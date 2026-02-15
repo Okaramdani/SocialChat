@@ -28,7 +28,7 @@ class MediaController extends Controller
 
         $file = $request->file('file');
         $filename = time() . '_' . $file->getClientOriginalName();
-        $path = $file->storeAs('media', $filename, 'public');
+        $path = $file->storeAs('media', $filename, 'media');
 
         $media = MediaTimeline::create([
             'user_id' => $request->user()->id,
@@ -51,7 +51,7 @@ class MediaController extends Controller
         }
 
         if ($media->media_path) {
-            Storage::disk('public')->delete('media/' . $media->media_path);
+            Storage::disk('media')->delete('media/' . $media->media_path);
         }
 
         $media->delete();

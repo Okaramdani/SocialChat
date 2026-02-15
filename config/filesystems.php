@@ -56,6 +56,13 @@ return [
             'throw' => false,
         ],
 
+        'media' => [
+            'driver' => 'local',
+            'root' => public_path('assets'),
+            'url' => env('APP_URL').'/assets',
+            'visibility' => 'public',
+        ],
+
     ],
 
     /*
