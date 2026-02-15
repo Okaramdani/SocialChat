@@ -1,0 +1,36 @@
+[build]
+  image = "flyio/builder:latest"
+
+[deploy]
+  release_command = "php artisan migrate --force"
+
+[[services]]
+  http_checks = []
+  internal_port = 8080
+  processes = ["app"]
+  protocol = "tcp"
+
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+
+  [[services.ports]]
+    force_https = true
+    handlers = ["http"]
+    port = 8080
+
+  [[services.tcp_checks]]
+    grace_period = "30s"
+    interval = "15s"
+    restart_limit = 6
+    timeout = "5s"
+
+[env]
+  LOG_CHANNEL = "stderr"
+  PHP_ERROR_REPORTING = "E_ALL & ~E_DEPRECATED"
+
+[meta]
+  auto_rollback = true
+
+[processes]
+  app = "php artisan serve --host=0.0.0.0 --port=8080"
